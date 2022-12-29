@@ -12,7 +12,10 @@ module.exports.hello = async (event) => {
     if (
         // for testing
         // payload.pull_request.title === 'ignore' ||
-        payload.pull_request.head.ref === 'master' &&
+        (
+            payload.pull_request.head.ref === 'master' ||
+            payload.pull_request.head.ref === 'main'
+        ) &&
         payload.pull_request.base.ref === 'production' &&
         payload.pull_request.user.login !== process.env.GH_USER
     ) {
